@@ -5,7 +5,7 @@ import ExperiencesPage from "./pages/admin/experiences";
 import SkillsPage from "./pages/admin/skills";
 import PortfolioPage from "./pages/admin/portfolio";
 import UsersPage from "./pages/admin/users";
-import HomePage from "./pages/public/home";
+// import HomePage from "./pages/public/home";
 import LoginRegisterPage from "./pages/public/login-register";
 import NotFoundPage from "./pages/public/notFound";
 import { useSelector } from "react-redux";
@@ -17,7 +17,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        {/* <Route path="/" element={<HomePage />} /> */}
         <Route path="loginRegister" element={<LoginRegisterPage />} />
 
         <Route
