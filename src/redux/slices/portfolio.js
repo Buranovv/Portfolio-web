@@ -66,38 +66,42 @@ const portfolioSlice = createSlice({
       state.photoData = payload;
     },
   },
-  extraReducers: {
-    [getPortfolios.pending]: (state) => {
-      state.loading = true;
-    },
-    [getPortfolios.fulfilled]: (state, { payload: { data, pagination } }) => {
-      let newData = data.map((el) => ({ ...el, key: el._id }));
-      state.portfolios = newData;
-      state.total = pagination.total;
-      state.loading = false;
-    },
-    [getPortfolios.rejected]: (state) => {
-      state.loading = false;
-    },
-    [addPortfolio.pending]: (state) => {
-      state.isModalLoading = true;
-    },
-    [addPortfolio.fulfilled]: (state) => {
-      state.isModalLoading = false;
-    },
-    [addPortfolio.rejected]: (state) => {
-      state.isModalLoading = false;
-    },
-    [uploadPhoto.pending]: (state) => {
-      state.photoLoad = true;
-    },
-    [uploadPhoto.fulfilled]: (state, { payload }) => {
-      state.photoData = payload;
-      state.photoLoad = false;
-    },
-    [uploadPhoto.rejected]: (state) => {
-      state.photoLoad = false;
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getPortfolios.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(
+        getPortfolios.fulfilled,
+        (state, { payload: { data, pagination } }) => {
+          let newData = data.map((el) => ({ ...el, key: el._id }));
+          state.portfolios = newData;
+          state.total = pagination.total;
+          state.loading = false;
+        }
+      )
+      .addCase(getPortfolios.rejected, (state) => {
+        state.loading = false;
+      })
+      .addCase(addPortfolio.pending, (state) => {
+        state.isModalLoading = true;
+      })
+      .addCase(addPortfolio.fulfilled, (state) => {
+        state.isModalLoading = false;
+      })
+      .addCase(addPortfolio.rejected, (state) => {
+        state.isModalLoading = false;
+      })
+      .addCase(uploadPhoto.pending, (state) => {
+        state.photoLoad = true;
+      })
+      .addCase(uploadPhoto.fulfilled, (state, { payload }) => {
+        state.photoData = payload;
+        state.photoLoad = false;
+      })
+      .addCase(uploadPhoto.rejected, (state) => {
+        state.photoLoad = false;
+      });
   },
 });
 

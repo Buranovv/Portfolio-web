@@ -6,9 +6,11 @@ import {
   Input,
   Modal,
   Pagination,
+  Select,
   Space,
   Table,
 } from "antd";
+
 import {
   UserAddOutlined,
   SaveOutlined,
@@ -18,14 +20,14 @@ import {
 import Search from "antd/es/input/Search";
 import { LIMIT } from "../../../constants";
 import {
-  useAddExperienceMutation,
-  useDeleteExperienceMutation,
-  useGetExperienceMutation,
-  useGetExperiencesQuery,
-  useUpdateExperienceMutation,
-} from "../../../redux/queries/experience";
+  useAddEducationMutation,
+  useDeleteEducationMutation,
+  useGetEducationMutation,
+  useGetEducationsQuery,
+  useUpdateEducationMutation,
+} from "../../../redux/queries/education";
 
-const ExperiencesPage = () => {
+const EducationPage = () => {
   const [form] = Form.useForm();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalLoading, setIsModalLoading] = useState(false);
@@ -34,15 +36,15 @@ const ExperiencesPage = () => {
   const [search, setSearch] = useState("");
 
   const {
-    data: { experiences, total } = { educations: [], total: 0 },
+    data: { educations, total } = { educations: [], total: 0 },
     isFetching,
     refetch,
-  } = useGetExperiencesQuery({ page, search });
+  } = useGetEducationsQuery({ page, search });
 
-  const [addExperience] = useAddExperienceMutation();
-  const [updateExperience] = useUpdateExperienceMutation();
-  const [getExperience] = useGetExperienceMutation();
-  const [deleteExperience] = useDeleteExperienceMutation();
+  const [addEducation] = useAddEducationMutation();
+  const [updateEducation] = useUpdateEducationMutation();
+  const [getEducation] = useGetEducationMutation();
+  const [deleteEducation] = useDeleteEducationMutation();
 
   const showModal = async () => {
     setIsModalOpen(true);
@@ -64,9 +66,9 @@ const ExperiencesPage = () => {
       values.startDate = new Date(values.startDate).toISOString();
       values.endDate = new Date(values.endDate).toISOString();
       if (selected === null) {
-        await addExperience(values).unwrap();
+        await addEducation(values).unwrap();
       } else {
-        await updateExperience({ body: values, id: selected }).unwrap();
+        await updateEducation({ body: values, id: selected }).unwrap();
       }
 
       setIsModalOpen(false);
@@ -77,9 +79,10 @@ const ExperiencesPage = () => {
   };
 
   const handleEdit = async (id) => {
+    console.log(id);
     setSelected(id);
     setIsModalOpen(true);
-    const { data } = await getExperience(id);
+    const { data } = await getEducation(id);
     const newData = {
       ...data,
       startDate: new Date(data?.startDate).toISOString().substring(0, 10),
@@ -92,7 +95,7 @@ const ExperiencesPage = () => {
     Modal.confirm({
       title: "Do you want to delete?",
       onOk: async () => {
-        await deleteExperience(id).unwrap();
+        await deleteEducation(id).unwrap();
         refetch();
       },
     });
@@ -100,26 +103,25 @@ const ExperiencesPage = () => {
 
   const columns = [
     {
-      title: "Work name",
-      dataIndex: "workName",
-      key: "workName",
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
     },
     {
-      title: "Company nam",
-      dataIndex: "companyName",
-      key: "companyName",
+      title: "Level",
+      dataIndex: "level",
+      key: "level",
     },
     {
       title: "Description",
       dataIndex: "description",
       key: "description",
-      render: (data) => <p>{data.slice(0, 30)}</p>,
     },
     {
       title: "User",
       dataIndex: "user",
       key: "user",
-      render: (user) => `${user?.firstName ?? ""} ${user?.lastName ?? ""}`,
+      render: (user) => `${user?.firstName} ${user?.lastName}`,
     },
     {
       title: "Action",
@@ -154,7 +156,7 @@ const ExperiencesPage = () => {
         }}
         title={() => (
           <Flex align="center" justify="space-between">
-            <h2>Experiences ({total})</h2>
+            <h2>Educations ({total})</h2>
             <Form
               name="search"
               wrapperCol={{
@@ -178,12 +180,12 @@ const ExperiencesPage = () => {
               onClick={showModal}
               icon={<UserAddOutlined />}
             >
-              Add experiences
+              Add education
             </Button>
           </Flex>
         )}
         loading={isFetching}
-        dataSource={experiences}
+        dataSource={educations}
         columns={columns}
         pagination={false}
       />
@@ -196,7 +198,7 @@ const ExperiencesPage = () => {
         />
       ) : null}
       <Modal
-        title="Experience data"
+        title="Education data"
         okText={selected === null ? "Add" : "Save"}
         okButtonProps={{
           icon: selected === null ? <UserAddOutlined /> : <SaveOutlined />,
@@ -208,19 +210,20 @@ const ExperiencesPage = () => {
         confirmLoading={isModalLoading}
       >
         <Form
-          name="experience"
+          name="education"
           labelCol={{
             span: 24,
           }}
           wrapperCol={{
             span: 24,
           }}
+          initialValues={{ level: "low" }}
           autoComplete="off"
           form={form}
         >
           <Form.Item
-            label="Work name"
-            name="workName"
+            label="Name"
+            name="name"
             rules={[
               {
                 required: true,
@@ -230,20 +233,17 @@ const ExperiencesPage = () => {
           >
             <Input />
           </Form.Item>
-
-          <Form.Item
-            label="Company name"
-            name="companyName"
-            rules={[
-              {
-                required: true,
-                message: "Please fill this field!",
-              },
-            ]}
-          >
-            <Input />
+          <Form.Item name="level">
+            <Select
+              style={{ width: 120 }}
+              allowClear
+              options={[
+                { value: "high", label: "High" },
+                { value: "middle", label: "Middle" },
+                { value: "low", label: "Low" },
+              ]}
+            />
           </Form.Item>
-
           <Form.Item
             label="Description"
             name="description"
@@ -288,4 +288,4 @@ const ExperiencesPage = () => {
   );
 };
 
-export default ExperiencesPage;
+export default EducationPage;

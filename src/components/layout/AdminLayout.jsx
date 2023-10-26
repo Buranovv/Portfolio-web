@@ -53,6 +53,10 @@ const AdminLayout = () => {
               label: <Link to="/dashboard">Dashboard</Link>,
             },
             {
+              key: "/education",
+              label: <Link to="/education">Education</Link>,
+            },
+            {
               key: "/experiences",
               label: <Link to="/experiences">Experiences</Link>,
             },

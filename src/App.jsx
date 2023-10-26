@@ -10,6 +10,7 @@ import LoginRegisterPage from "./pages/public/login-register";
 import NotFoundPage from "./pages/public/notFound";
 import { useSelector } from "react-redux";
 import { authName } from "./redux/slices/auth";
+import EducationPage from "./pages/admin/education";
 
 function App() {
   const { isAuth, user } = useSelector((state) => state[authName]);
@@ -36,6 +37,7 @@ function App() {
           }
         >
           <Route path="dashboard" element={<DashboardPage />} />
+          <Route path="education" element={<EducationPage />} />
           <Route path="experiences" element={<ExperiencesPage />} />
           <Route path="skills" element={<SkillsPage />} />
           <Route path="portfolio" element={<PortfolioPage />} />
