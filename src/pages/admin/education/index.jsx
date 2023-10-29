@@ -116,12 +116,13 @@ const EducationPage = () => {
       title: "Description",
       dataIndex: "description",
       key: "description",
+      render: (data) => <p>{data.slice(0, 30)}</p>,
     },
     {
       title: "User",
       dataIndex: "user",
       key: "user",
-      render: (user) => `${user?.firstName} ${user?.lastName}`,
+      render: (user) => `${user?.firstName ?? ""} ${user?.lastName ?? ""}`,
     },
     {
       title: "Action",

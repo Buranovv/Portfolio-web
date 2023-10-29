@@ -7,3 +7,7 @@ export const getPhoto = (photo) => {
 
   return `${PHOTO_URL}${realPhoto}`;
 };
+
+export const getUserPhoto = (photo) => {
+  return `${PHOTO_URL}${photo}`;
+};

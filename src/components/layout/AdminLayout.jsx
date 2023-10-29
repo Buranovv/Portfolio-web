@@ -6,20 +6,28 @@ import {
   DashboardOutlined,
   TeamOutlined,
   LogoutOutlined,
+  UserOutlined,
+  BankOutlined,
+  BulbOutlined,
+  FolderOpenOutlined,
+  FileProtectOutlined,
 } from "@ant-design/icons";
 // import PropTypes from "prop-types";
-import { Layout, Menu, Button, theme, Modal } from "antd";
-import "./adminLayout.css";
+import { Layout, Menu, Button, theme, Modal, Avatar, Badge } from "antd";
 import { removeAuth } from "../../redux/slices/auth";
 import { TOKEN, USER } from "../../constants";
 import { useDispatch } from "react-redux";
 import Cookies from "js-cookie";
+import "./adminLayout.scss";
+import { useGetUsersQuery } from "../../redux/queries/notClient-user";
 const { Header, Sider, Content } = Layout;
 
 const AdminLayout = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
+
+  const { data: { total } = { total: 0 }, isFetching } = useGetUsersQuery();
 
   const [collapsed, setCollapsed] = useState(false);
   const {
@@ -54,18 +62,22 @@ const AdminLayout = () => {
             },
             {
               key: "/education",
+              icon: <BankOutlined />,
               label: <Link to="/education">Education</Link>,
             },
             {
               key: "/experiences",
+              icon: <FileProtectOutlined />,
               label: <Link to="/experiences">Experiences</Link>,
             },
             {
               key: "/portfolio",
+              icon: <FolderOpenOutlined />,
               label: <Link to="/portfolio">Portfolio</Link>,
             },
             {
               key: "/skills",
+              icon: <BulbOutlined />,
               label: <Link to="/skills">Skills</Link>,
             },
             {
@@ -78,6 +90,7 @@ const AdminLayout = () => {
               icon: <LogoutOutlined />,
               label: "Logout",
               onClick: logout,
+              className: "logout",
             },
           ]}
         />
@@ -90,16 +103,42 @@ const AdminLayout = () => {
             background: colorBgContainer,
           }}
         >
-          <Button
-            type="text"
-            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-            onClick={() => setCollapsed(!collapsed)}
-            style={{
-              fontSize: "16px",
-              width: 64,
-              height: 64,
-            }}
-          />
+          <div className="header-box">
+            <Button
+              type="text"
+              icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+              onClick={() => setCollapsed(!collapsed)}
+              style={{
+                fontSize: "16px",
+                width: 64,
+                height: 64,
+              }}
+            />
+            <div className="tools_box">
+              <Link to="/users/notClientUsers">
+                <Badge count={isFetching ? "..." : total} className="badge">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="30"
+                    height="30"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <path
+                      d="M21.6306 14.3141L15.9976 9.41989L15.1122 6.00861C14.368 3.14596 11.4456 1.42946 8.58299 2.17364C5.72034 2.91782 4.00383 5.84022 4.74801 8.70287L5.6117 12.0272L3.0641 19.1431C2.7762 19.9416 3.50409 20.7401 4.32975 20.5228L21.2069 16.1338C22.0326 15.922 22.277 14.8682 21.636 14.3087L21.6306 14.3141Z"
+                      fill="black"
+                    />
+                    <path
+                      d="M13.7596 19.0291L7.82793 20.5717C8.45804 21.8972 9.95727 22.6305 11.4293 22.2502C12.9014 21.87 13.852 20.4957 13.7596 19.0291Z"
+                      fill="black"
+                    />
+                  </svg>
+                </Badge>
+              </Link>
+
+              <Avatar size={"large"} icon={<UserOutlined />} />
+            </div>
+          </div>
         </Header>
         <Content
           className="admin-main"

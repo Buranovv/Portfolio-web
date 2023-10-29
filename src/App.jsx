@@ -11,6 +11,7 @@ import NotFoundPage from "./pages/public/notFound";
 import { useSelector } from "react-redux";
 import { authName } from "./redux/slices/auth";
 import EducationPage from "./pages/admin/education";
+import NotUsersPage from "./pages/admin/client-users";
 
 function App() {
   const { isAuth, user } = useSelector((state) => state[authName]);
@@ -42,6 +43,7 @@ function App() {
           <Route path="skills" element={<SkillsPage />} />
           <Route path="portfolio" element={<PortfolioPage />} />
           <Route path="users" element={<UsersPage />} />
+          <Route path="users/:notClientUsers" element={<NotUsersPage />} />
         </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

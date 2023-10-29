@@ -5,7 +5,7 @@ import Cookies from "js-cookie";
 const experienceQuery = createApi({
   reducerPath: "experience",
   baseQuery: fetchBaseQuery({
-    baseUrl: `${ENDPOINT}api/v1`,
+    baseUrl: `${ENDPOINT}api/v1/`,
     prepareHeaders: (headers) => {
       headers.set("Authorization", `Bearer ${Cookies.get(TOKEN)}`);
       return headers;
@@ -13,7 +13,11 @@ const experienceQuery = createApi({
   }),
   endpoints: (builder) => ({
     getExperiences: builder.query({
-      query: (params) => ({ url: "experiences", method: "GET", params }),
+      query: (params) => ({
+        url: "experiences",
+        method: "GET",
+        params,
+      }),
       transformResponse: (res) => ({
         experiences: res.data.map((el) => ({ ...el, key: el?._id })),
         total: res.pagination.total,

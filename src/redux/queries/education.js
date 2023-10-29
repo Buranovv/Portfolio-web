@@ -5,7 +5,7 @@ import Cookies from "js-cookie";
 const educationQuery = createApi({
   reducerPath: "education",
   baseQuery: fetchBaseQuery({
-    baseUrl: `${ENDPOINT}api/v1`,
+    baseUrl: `${ENDPOINT}api/v1/`,
     prepareHeaders: (headers) => {
       headers.set("Authorization", `Bearer ${Cookies.get(TOKEN)}`);
       return headers;
