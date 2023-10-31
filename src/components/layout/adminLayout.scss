@@ -33,8 +33,12 @@
 }
 .tools_box {
   display: flex;
-  align-items: center;
+  align-items: center !important;
   gap: 30px;
+
+  a {
+    line-height: 0;
+  }
 }
 .badge {
   padding: 1.5px 3px !important;

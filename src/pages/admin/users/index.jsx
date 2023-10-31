@@ -20,7 +20,7 @@ import {
 import Search from "antd/es/input/Search";
 import { LIMIT } from "../../../constants";
 
-import { getPhoto } from "../../../utils";
+import { getUserPhoto } from "../../../utils";
 import {
   useAddUserMutation,
   useDeleteUserMutation,
@@ -100,7 +100,7 @@ const UsersPage = () => {
       title: "Photo",
       dataIndex: "photo",
       key: "photo",
-      render: (photo) => <Image src={getPhoto(photo)} />,
+      render: (photo) => <Image style={{width:"50px"}} src={getUserPhoto(photo)} />,
     },
     {
       title: "Firstname",

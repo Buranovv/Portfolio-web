@@ -1,20 +1,29 @@
 import { Fragment } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { Button, Form, Input } from "antd";
 import request from "../../server";
 import { TOKEN, USER } from "../../constants";
 import Cookies from "js-cookie";
 import { setAuth } from "../../redux/slices/auth";
+import { message } from "antd";
 
 const RegisterForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const submit = async (values) => {
+  const submit = async (e) => {
+    e.preventDefault();
+    const values = {
+      firstName: e.target.firstName.value,
+      lastName: e.target.lastName.value,
+      username: e.target.username.value,
+      password: e.target.password.value,
+    };
+
     const {
       data: { token, user },
     } = await request.post("auth/register", values);
+    message.success("Successfully registered!");
 
     Cookies.set(TOKEN, token);
     localStorage.setItem(USER, JSON.stringify(user));
@@ -25,85 +34,28 @@ const RegisterForm = () => {
 
   return (
     <Fragment>
-      <Form
-        name="register"
-        labelCol={{
-          span: 24,
-        }}
-        wrapperCol={{
-          span: 24,
-        }}
-        style={{
-          maxWidth: 600,
-          padding: "30px",
-          border: "1px solid black",
-          borderRadius: "10px",
-        }}
-        onFinish={submit}
-        autoComplete="off"
-      >
-        <Form.Item
-          label="Firstname"
-          name="firstName"
-          rules={[
-            {
-              required: true,
-              message: "Please input your firstname!",
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item>
-
-        <Form.Item
-          label="Lastname"
-          name="lastName"
-          rules={[
-            {
-              required: true,
-              message: "Please input your username!",
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item>
-
-        <Form.Item
-          label="Username"
-          name="username"
-          rules={[
-            {
-              required: true,
-              message: "Please input your username!",
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item>
-
-        <Form.Item
-          label="Password"
-          name="password"
-          rules={[
-            {
-              required: true,
-              message: "Please input your password!",
-            },
-          ]}
-        >
-          <Input.Password />
-        </Form.Item>
-
-        <Form.Item
-          wrapperCol={{
-            span: 24,
-          }}
-        >
-          <Button style={{ width: "100%" }} type="primary" htmlType="submit">
-            Submit
-          </Button>
-        </Form.Item>
-      </Form>
+      <form onSubmit={submit} className="registerForm">
+        <div>
+          <input type="text" name="firstName" placeholder="Firstname" />
+        </div>
+        <div>
+          <input type="text" name="lastName" placeholder="Lastname" />
+        </div>
+        <div>
+          <input type="text" name="username" placeholder="Username" />
+        </div>
+        <div>
+          <input type="password" name="Password" placeholder="password" />
+        </div>
+        <div>
+          <input
+            type="password"
+            name="confirmPassword"
+            placeholder="Confirm password"
+          />
+        </div>
+        <button type="submit">Submit</button>
+      </form>
     </Fragment>
   );
 };

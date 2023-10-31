@@ -1,8 +1,9 @@
-import { Flex } from "antd";
 import PropTypes from "prop-types";
 import LoginForm from "../../../components/form/LoginForm";
 import RegisterForm from "../../../components/form/RegisterForm";
 import { useState } from "react";
+
+import "./style.scss";
 
 const LoginRegisterPage = () => {
   const [toLogin, setToLogin] = useState(true);
@@ -18,20 +19,26 @@ const LoginRegisterPage = () => {
   };
 
   return (
-    <Flex style={{ height: "100vh" }} align="center" justify="center">
-      <div className={toLogin ? "d-block" : "d-none"}>
+    <div className="login-body">
+      <div
+        style={{ display: `${toLogin ? "block" : "none"}` }}
+        className="d-block"
+      >
         <LoginForm />
-        <a className="mt-3" onClick={backRegister}>
+        <a onClick={backRegister}>
           Register
         </a>
       </div>
-      <div className={toRegister ? "d-block" : "d-none"}>
+      <div
+        style={{ display: `${toRegister ? "block" : "none"}` }}
+        className="d-block"
+      >
         <RegisterForm />
-        <a className="mt-3" onClick={backLogin}>
+        <a onClick={backLogin}>
           Login
         </a>
       </div>
-    </Flex>
+    </div>
   );
 };
 

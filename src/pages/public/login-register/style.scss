@@ -1,0 +1,104 @@
+.login-body {
+  height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: url("https://c0.wallpaperflare.com/preview/231/247/682/5be98e06c77ea.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  .d-block {
+    width: 50%;
+  }
+  a {
+    margin-top: 20px !important;
+    color: rgb(52, 52, 255);
+
+    cursor: pointer;
+  }
+  .registerForm,
+  .loginForm {
+    width: 100%;
+    div {
+      position: relative;
+      margin-bottom: 30px;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-bottom: 3px solid white;
+      background: none;
+
+      color: #fff;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 24px;
+
+      outline: none;
+    }
+    button {
+      width: 100%;
+      margin-top: 30px;
+      padding: 10px;
+      border: none;
+
+      background: #f0f0f0;
+
+      color: #000;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 24px;
+    }
+    .userSvg {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+    }
+    .passwordSvg {
+      position: absolute !important;
+      top: 15px;
+      right: 15px;
+      margin: 0;
+      svg {
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+        path {
+          fill: black;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 650px) {
+  .login-body {
+    .d-block {
+      width: 70%;
+    }
+    .registerForm,
+    .loginForm {
+      width: 100%;
+      div {
+        margin-bottom: 20px;
+      }
+      input {
+        padding: 10px;
+      }
+      button {
+        margin-top: 20px;
+        padding: 10px;
+      }
+    }
+  }
+}
+@media (max-width: 450px) {
+  .login-body {
+    .d-block {
+      width: 95%;
+    }
+  }
+}

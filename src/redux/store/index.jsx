@@ -17,6 +17,7 @@ import notClientUserQuery, {
   notClientName,
   notClientReducer,
 } from "../queries/notClient-user";
+import accountQuery, { accountName, accountReducer } from "../queries/account";
 
 const reducer = {
   [authName]: authReducer,
@@ -26,6 +27,7 @@ const reducer = {
   [experienceName]: experienceReducer,
   [userName]: userReducer,
   [notClientName]: notClientReducer,
+  [accountName]: accountReducer,
 };
 
 const store = configureStore({
@@ -36,6 +38,7 @@ const store = configureStore({
       experienceQuery.middleware,
       userQuery.middleware,
       notClientUserQuery.middleware,
+      accountQuery.middleware,
     ]),
 });
 

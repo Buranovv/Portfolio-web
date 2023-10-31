@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import {
   MenuFoldOutlined,
@@ -6,7 +6,7 @@ import {
   DashboardOutlined,
   TeamOutlined,
   LogoutOutlined,
-  UserOutlined,
+  // UserOutlined,
   BankOutlined,
   BulbOutlined,
   FolderOpenOutlined,
@@ -20,9 +20,15 @@ import { useDispatch } from "react-redux";
 import Cookies from "js-cookie";
 import "./adminLayout.scss";
 import { useGetUsersQuery } from "../../redux/queries/notClient-user";
+import { useGetAccountMutation } from "../../redux/queries/account";
+import { getUserPhoto } from "../../utils";
 const { Header, Sider, Content } = Layout;
 
 const AdminLayout = () => {
+  const [photoData, setPhotoData] = useState(null);
+
+  const [getAccount] = useGetAccountMutation();
+
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
@@ -45,6 +51,14 @@ const AdminLayout = () => {
       },
     });
   };
+
+  useEffect(() => {
+    const getUser = async () => {
+      const { data } = await getAccount();
+      setPhotoData(data?.photo);
+    };
+    getUser();
+  }, [getAccount]);
 
   return (
     <Layout style={{ height: "100vh" }}>
@@ -136,7 +150,13 @@ const AdminLayout = () => {
                 </Badge>
               </Link>
 
-              <Avatar size={"large"} icon={<UserOutlined />} />
+              <Link to="/account">
+                <Avatar
+                  className="avatar"
+                  src={getUserPhoto(photoData)}
+                  size={"large"}
+                />
+              </Link>
             </div>
           </div>
         </Header>

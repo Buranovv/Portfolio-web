@@ -1,0 +1,110 @@
+.accountPage {
+  height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  a {
+    margin-top: 20px !important;
+    color: rgb(52, 52, 255);
+
+    cursor: pointer;
+  }
+  .accountForm {
+    width: 50%;
+    .ant-upload {
+      width: 100% !important;
+      height: 200px !important;
+    }
+    .img-box {
+      width: 200px;
+    }
+
+    .inputBox {
+      position: relative;
+      margin-bottom: 30px;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-bottom: 3px solid black;
+      background: none;
+
+      color: #000;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 24px;
+
+      outline: none;
+    }
+    button {
+      width: 100%;
+      margin-top: 30px;
+      padding: 10px;
+      border: none;
+
+      background: #000;
+
+      color: #fff;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 24px;
+
+      cursor: pointer;
+    }
+
+    button:active {
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
+        rgba(255, 255, 255, 0.3) 0px 18px 36px -18px inset;
+    }
+    .userSvg {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+    }
+    .passwordSvg {
+      position: absolute !important;
+      top: 15px;
+      right: 15px;
+      margin: 0;
+      svg {
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+        path {
+          fill: black;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 650px) {
+  .accountPage {
+    .d-block {
+      width: 70%;
+    }
+    .accountForm {
+      width: 100%;
+      .inputBox {
+        margin-bottom: 20px;
+      }
+      input {
+        padding: 10px;
+      }
+      button {
+        margin-top: 20px;
+        padding: 10px;
+      }
+    }
+  }
+}
+@media (max-width: 450px) {
+  .accountPage {
+    .d-block {
+      width: 95%;
+    }
+  }
+}
