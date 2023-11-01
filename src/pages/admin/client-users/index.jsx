@@ -84,7 +84,7 @@ const NotUsersPage = () => {
       render: (id) => (
         <Space size="middle">
           <Form
-            name="notUser"
+            name="notClient"
             labelCol={{
               span: 24,
             }}
@@ -111,7 +111,7 @@ const NotUsersPage = () => {
           <Flex align="center" justify="space-between">
             <h2>Users ({total})</h2>
             <Form
-              name="search"
+              name="notClientSearch"
               wrapperCol={{
                 span: 24,
               }}

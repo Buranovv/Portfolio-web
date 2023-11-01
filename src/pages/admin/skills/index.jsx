@@ -145,7 +145,7 @@ const SkillsPage = () => {
           <Flex align="center" justify="space-between">
             <h2>Skills ({total})</h2>
             <Form
-              name="search"
+              name="skillSearch"
               wrapperCol={{
                 span: 24,
               }}
@@ -197,7 +197,7 @@ const SkillsPage = () => {
         confirmLoading={isModalLoading}
       >
         <Form
-          name="teacher"
+          name="skills"
           labelCol={{
             span: 24,
           }}

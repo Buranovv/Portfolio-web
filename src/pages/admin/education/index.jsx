@@ -159,7 +159,7 @@ const EducationPage = () => {
           <Flex align="center" justify="space-between">
             <h2>Educations ({total})</h2>
             <Form
-              name="search"
+              name="educationSearch"
               wrapperCol={{
                 span: 24,
               }}

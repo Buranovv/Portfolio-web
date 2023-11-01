@@ -156,7 +156,7 @@ const ExperiencesPage = () => {
           <Flex align="center" justify="space-between">
             <h2>Experiences ({total})</h2>
             <Form
-              name="search"
+              name="experienceSearch"
               wrapperCol={{
                 span: 24,
               }}

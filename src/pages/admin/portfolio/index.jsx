@@ -170,7 +170,7 @@ const PortfolioPage = () => {
           <Flex align="center" justify="space-between">
             <h2>Portfolios ({total})</h2>
             <Form
-              name="search"
+              name="portfolioSearch"
               wrapperCol={{
                 span: 24,
               }}
