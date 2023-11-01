@@ -1,14 +1,75 @@
+@font-face {
+  font-family: InterR;
+  src: url(./assets/fonts/Inter-Regular.ttf);
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: InterM;
+  src: url(./assets/fonts/Inter-Medium.ttf);
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: Sen;
+  src: url(./assets/fonts/Sen-Bold.ttf);
+  font-weight: 700;
+  font-style: normal;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
 *,
 *::after,
 *::before {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
-
+li {
+  list-style: none;
+}
 a {
   text-decoration: none;
 }
-body {
-  margin: 0;
+input,
+select {
+  outline: none;
+}
+:root {
+  --lyt-bgclr: #232536;
+  --login-btn-bgclr: #ffffff;
+  --ctrl-btns-clr: #ffd050;
+  --lyt-txt-clr: #ffffff;
+  --txt-dark: 35, 37, 54;
+  --txt-light: 255, 255, 255;
+}
+.userMain {
+  margin-top: 86px;
+}
+
+.container {
+  max-width: 1433px;
+  padding: 0 50px;
+  margin: 0 auto;
+}
+
+@media (max-width: 835px) {
+  .userMain {
+    margin-top: 70px;
+  }
+}
+
+@media (max-width: 650px) {
+  .container {
+    padding: 0 35px;
+  }
+  .userMain {
+    margin-top: 47px;
+  }
+}
+
+@media (max-width: 470px) {
+  .container {
+    padding: 0 10px;
+  }
 }

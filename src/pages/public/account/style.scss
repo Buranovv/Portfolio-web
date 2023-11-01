@@ -1,6 +1,4 @@
 .accountPage {
-  height: 100vh;
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -11,8 +9,40 @@
 
     cursor: pointer;
   }
-  .accountForm {
+  .formBox {
     width: 50%;
+    margin: 30px 0;
+  }
+  .changePassword {
+    h2 {
+      margin: 70px 0 30px;
+
+      font-weight: 700;
+      font-size: 30px;
+
+      text-align: center;
+    }
+  }
+  .logoutPart {
+    h2 {
+      margin: 70px 0 30px;
+
+      font-weight: 700;
+      font-size: 30px;
+
+      text-align: center;
+    }
+    .logout {
+      width: 100%;
+      padding: 10px 10px;
+      border: none;
+
+      position: relative !important;
+      cursor: pointer;
+    }
+  }
+  .accountForm {
+    width: 100%;
     .ant-upload {
       width: 100% !important;
       height: 200px !important;
@@ -86,8 +116,10 @@
     .d-block {
       width: 70%;
     }
-    .accountForm {
+    .formBox {
       width: 100%;
+    }
+    .accountForm {
       .inputBox {
         margin-bottom: 20px;
       }

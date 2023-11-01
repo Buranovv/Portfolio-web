@@ -9,10 +9,19 @@ import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
 
 import "../../pages/public/login-register/style.scss";
 import { message } from "antd";
+import { useForm } from "react-hook-form";
 
 const LoginForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const {
+    formState: { errors },
+    register,
+    handleSubmit,
+  } = useForm({
+    mode: "onTouched",
+  });
 
   const submit = async (e) => {
     e.preventDefault();
@@ -28,19 +37,37 @@ const LoginForm = () => {
 
     Cookies.set(TOKEN, token);
     localStorage.setItem(USER, JSON.stringify(user));
-    
+
     request.defaults.headers.Authorization = `Bearer ${token}`;
 
-    navigate("/dashboard");
+    if (user?.role === "client") {
+      navigate("/clientPortfolios");
+    } else if (user?.role === "user") {
+      navigate("/");
+    } else {
+      navigate("/dashboard");
+    }
 
     dispatch(setAuth(user));
   };
 
   return (
     <Fragment>
-      <form onSubmit={submit} className="loginForm">
+      <form onSubmit={handleSubmit(submit)} className="loginForm">
         <div>
-          <input type="text" name="username" />
+          <input
+            type="text"
+            {...register("username", {
+              required: "This field must not be empty!",
+            })}
+            placeholder="Username"
+            style={{
+              borderBottom: `3px solid ${errors.username ? "red" : "black"}`,
+            }}
+          />
+          {errors.username ? (
+            <p style={{ color: "red" }}>{errors.username?.message}</p>
+          ) : null}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="30"
@@ -58,7 +85,19 @@ const LoginForm = () => {
           </svg>
         </div>
         <div>
-          <input type="password" name="password" />
+          <input
+            type="text"
+            {...register("password", {
+              required: "This field must not be empty!",
+            })}
+            placeholder="Password"
+            style={{
+              borderBottom: `3px solid ${errors.password ? "red" : "black"}`,
+            }}
+          />
+          {errors.password ? (
+            <p style={{ color: "red" }}>{errors.password?.message}</p>
+          ) : null}
           <div className="passwordSvg">
             <EyeOutlined style={{ display: "none" }} />
             <EyeInvisibleOutlined style={{ display: "block" }} />

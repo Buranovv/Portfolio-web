@@ -1,16 +1,7 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { ENDPOINT, TOKEN } from "../../constants";
-import Cookies from "js-cookie";
+import createQuery from "../../server/query";
 
-const accountQuery = createApi({
+const accountQuery = createQuery({
   reducerPath: "account",
-  baseQuery: fetchBaseQuery({
-    baseUrl: `${ENDPOINT}api/v1/`,
-    prepareHeaders: (headers) => {
-      headers.set("Authorization", `Bearer ${Cookies.get(TOKEN)}`);
-      return headers;
-    },
-  }),
   tagTypes: ["account"],
   endpoints: (builder) => ({
     getAccount: builder.mutation({
@@ -21,7 +12,7 @@ const accountQuery = createApi({
       invalidatesTags: ["account"],
     }),
     updateAccount: builder.mutation({
-      query: ( body ) => ({
+      query: (body) => ({
         url: `auth/updatedetails`,
         method: "PUT",
         body,
@@ -36,6 +27,14 @@ const accountQuery = createApi({
       }),
       invalidatesTags: ["account"],
     }),
+    updatePassword: builder.mutation({
+      query: (body) => ({
+        url: "auth/updatepassword",
+        method: "PUT",
+        body,
+      }),
+      invalidatesTags: ["account"],
+    }),
   }),
 });
 
@@ -47,4 +46,5 @@ export const {
   useGetAccountMutation,
   useUpdateAccountMutation,
   useUploadPhotoMutation,
+  useUpdatePasswordMutation,
 } = accountQuery;

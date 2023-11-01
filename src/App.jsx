@@ -5,7 +5,7 @@ import ExperiencesPage from "./pages/admin/experiences";
 import SkillsPage from "./pages/admin/skills";
 import PortfolioPage from "./pages/admin/portfolio";
 import UsersPage from "./pages/admin/users";
-// import HomePage from "./pages/public/home";
+import HomePage from "./pages/public/home";
 import LoginRegisterPage from "./pages/public/login-register";
 import NotFoundPage from "./pages/public/notFound";
 import { useSelector } from "react-redux";
@@ -13,6 +13,8 @@ import { authName } from "./redux/slices/auth";
 import EducationPage from "./pages/admin/education";
 import NotUsersPage from "./pages/admin/client-users";
 import AccountPage from "./pages/public/account/AccountPage";
+import FrontLayout from "./components/layout/fronLayout/FrontLayout";
+import PortfoliosPage from "./pages/client/PortfoliosPage";
 
 function App() {
   const { isAuth, user } = useSelector((state) => state[authName]);
@@ -20,11 +22,14 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* <Route path="/" element={<HomePage />} /> */}
-        <Route path="loginRegister" element={<LoginRegisterPage />} />
-        {isAuth && user?.role !== "admin" ? (
-          <Route path="account" element={<AccountPage />} />
-        ) : null}
+        <Route element={<FrontLayout />}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="clientPortfolios" element={<PortfoliosPage />} />
+          <Route path="loginRegister" element={<LoginRegisterPage />} />
+          {isAuth && user?.role !== "admin" ? (
+            <Route path="account" element={<AccountPage />} />
+          ) : null}
+        </Route>
 
         <Route
           element={
