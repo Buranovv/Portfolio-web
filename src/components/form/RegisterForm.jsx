@@ -21,15 +21,7 @@ const RegisterForm = () => {
     mode: "onTouched",
   });
 
-  const submit = async (e) => {
-    e.preventDefault();
-    const values = {
-      firstName: e.target.firstName.value,
-      lastName: e.target.lastName.value,
-      username: e.target.username.value,
-      password: e.target.password.value,
-    };
-
+  const submit = async (values) => {
     const {
       data: { token, user },
     } = await request.post("auth/register", values);
