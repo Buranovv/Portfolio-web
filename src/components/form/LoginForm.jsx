@@ -56,7 +56,7 @@ const LoginForm = () => {
             })}
             placeholder="Username"
             style={{
-              borderBottom: `3px solid ${errors.username ? "red" : "black"}`,
+              borderBottom: `3px solid ${errors.username ? "red" : "white"}`,
             }}
           />
           {errors.username ? (
@@ -86,7 +86,7 @@ const LoginForm = () => {
             })}
             placeholder="Password"
             style={{
-              borderBottom: `3px solid ${errors.password ? "red" : "black"}`,
+              borderBottom: `3px solid ${errors.password ? "red" : "white"}`,
             }}
           />
           {errors.password ? (

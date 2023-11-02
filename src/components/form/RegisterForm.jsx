@@ -49,7 +49,7 @@ const RegisterForm = () => {
             })}
             placeholder="Firstname"
             style={{
-              borderBottom: `3px solid ${errors.firstName ? "red" : "black"}`,
+              borderBottom: `3px solid ${errors.firstName ? "red" : "white"}`,
             }}
           />
           {errors.firstName ? (
@@ -64,7 +64,7 @@ const RegisterForm = () => {
             })}
             placeholder="Lastname"
             style={{
-              borderBottom: `3px solid ${errors.lastName ? "red" : "black"}`,
+              borderBottom: `3px solid ${errors.lastName ? "red" : "white"}`,
             }}
           />
           {errors.lastName ? (
@@ -79,7 +79,7 @@ const RegisterForm = () => {
             })}
             placeholder="Username"
             style={{
-              borderBottom: `3px solid ${errors.username ? "red" : "black"}`,
+              borderBottom: `3px solid ${errors.username ? "red" : "white"}`,
             }}
           />
           {errors.username ? (
@@ -98,7 +98,7 @@ const RegisterForm = () => {
             })}
             placeholder="Password"
             style={{
-              borderBottom: `3px solid ${errors.password ? "red" : "black"}`,
+              borderBottom: `3px solid ${errors.password ? "red" : "white"}`,
             }}
           />
           {errors.password ? (
@@ -120,7 +120,7 @@ const RegisterForm = () => {
             placeholder="Confirm password"
             style={{
               borderBottom: `3px solid ${
-                errors.confirmPassword ? "red" : "black"
+                errors.confirmPassword ? "red" : "white"
               }`,
             }}
           />
