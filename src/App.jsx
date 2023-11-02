@@ -24,7 +24,9 @@ function App() {
       <Routes>
         <Route element={<FrontLayout />}>
           <Route path="/" element={<HomePage />} />
-          <Route path="clientPortfolios" element={<PortfoliosPage />} />
+          {isAuth && user?.role === "client" ? (
+            <Route path="clientPortfolios" element={<PortfoliosPage />} />
+          ) : null}
           <Route path="loginRegister" element={<LoginRegisterPage />} />
           {isAuth && user?.role !== "admin" ? (
             <Route path="account" element={<AccountPage />} />
