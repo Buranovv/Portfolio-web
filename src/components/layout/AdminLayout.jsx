@@ -20,14 +20,14 @@ import { useDispatch } from "react-redux";
 import Cookies from "js-cookie";
 import "./adminLayout.scss";
 import { useGetUsersQuery } from "../../redux/queries/notClient-user";
-import { useGetAccountMutation } from "../../redux/queries/account";
+import { useGetAccountQuery } from "../../redux/queries/account";
 import { getUserPhoto } from "../../utils";
 const { Header, Sider, Content } = Layout;
 
 const AdminLayout = () => {
   const [photoData, setPhotoData] = useState(null);
 
-  const [getAccount] = useGetAccountMutation();
+  const { data } = useGetAccountQuery();
 
   const dispatch = useDispatch();
   const location = useLocation();
@@ -54,11 +54,10 @@ const AdminLayout = () => {
 
   useEffect(() => {
     const getUser = async () => {
-      const { data } = await getAccount();
       setPhotoData(data?.photo);
     };
     getUser();
-  }, [getAccount]);
+  }, [data]);
 
   return (
     <Layout style={{ height: "100vh" }}>

@@ -4,12 +4,11 @@ const accountQuery = createQuery({
   reducerPath: "account",
   tagTypes: ["account"],
   endpoints: (builder) => ({
-    getAccount: builder.mutation({
+    getAccount: builder.query({
       query: () => ({
         url: `auth/me`,
         method: "GET",
       }),
-      invalidatesTags: ["account"],
     }),
     updateAccount: builder.mutation({
       query: (body) => ({
@@ -17,7 +16,6 @@ const accountQuery = createQuery({
         method: "PUT",
         body,
       }),
-      invalidatesTags: ["account"],
     }),
     uploadPhoto: builder.mutation({
       query: (file) => ({
@@ -25,7 +23,6 @@ const accountQuery = createQuery({
         method: "POST",
         body: file,
       }),
-      invalidatesTags: ["account"],
     }),
     updatePassword: builder.mutation({
       query: (body) => ({
@@ -43,7 +40,7 @@ const { reducer: accountReducer, reducerPath: accountName } = accountQuery;
 export { accountQuery as default, accountName, accountReducer };
 
 export const {
-  useGetAccountMutation,
+  useGetAccountQuery,
   useUpdateAccountMutation,
   useUploadPhotoMutation,
   useUpdatePasswordMutation,

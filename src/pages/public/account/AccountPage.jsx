@@ -7,15 +7,15 @@ import { getUserPhoto } from "../../../utils";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 
 import {
-  useGetAccountMutation,
+  useGetAccountQuery,
   useUpdateAccountMutation,
   useUploadPhotoMutation,
 } from "../../../redux/queries/account";
 import ChangePasswordForm from "../../../components/form/chamgePasswordForm/ChangePasswordForm";
-import "./style.scss";
 import { removeAuth } from "../../../redux/slices/auth";
 import { TOKEN, USER } from "../../../constants";
 import Cookies from "js-cookie";
+import "./style.scss";
 
 const AccountPage = () => {
   const dispatch = useDispatch();
@@ -23,11 +23,11 @@ const AccountPage = () => {
 
   const [photoData, setPhotoData] = useState(null);
   const [photoLoad, setPhotoLoad] = useState(false);
-  const [setLoad] = useState(false);
 
   const [uploadPhoto] = useUploadPhotoMutation();
-  const [getAccount] = useGetAccountMutation();
+  const { data } = useGetAccountQuery();
   const [updateAccount] = useUpdateAccountMutation();
+
   const {
     formState: { errors },
     register,
@@ -38,26 +38,17 @@ const AccountPage = () => {
   });
 
   useEffect(() => {
-    const getUser = async () => {
-      const { data } = await getAccount();
-      // console.log(data);
-      reset(data);
-      setPhotoData(data?.photo);
-    };
-    getUser();
-  }, [getAccount, reset]);
+    reset(data);
+    setPhotoData(data?.photo);
+  }, [data, reset]);
 
   const submit = async (values) => {
     Modal.confirm({
       title: "Do you want to change your password?",
       onOk: async () => {
-        try {
-          setLoad(true);
-          await updateAccount(values).unwrap();
-          message.success("Changes successfully saved!");
-        } finally {
-          setLoad(false);
-        }
+        values.photo = photoData;
+        await updateAccount(values).unwrap();
+        message.success("Changes successfully saved!");
       },
     });
   };
